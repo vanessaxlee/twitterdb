@@ -1,6 +1,6 @@
 package generator;
 
-import followertweet.Followers;
+import followtweet.Follows;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,22 +9,22 @@ import java.util.HashSet;
 import java.util.Random;
 
 /**
- * Generates the followers.csv file.
+ * Generates the follows.csv file.
  */
-public final class FollowerGenerator {
+public final class FollowGenerator {
 
     /**
-     * Main method to generate the followers.csv file.
+     * Main method to generate the follows.csv file.
      *
      * @param args args
      */
     public static void main(String... args) {
         WriteToFile wf = new WriteToFile();
         StringBuilder sb = new StringBuilder();
-        HashSet<Long> users = new HashSet<Long>();
+        HashSet<Long> users = new HashSet<>();
 
         try {
-            BufferedReader csvReader = new BufferedReader(new FileReader("followers.csv"));
+            BufferedReader csvReader = new BufferedReader(new FileReader("tweets.csv"));
             String row = "";
 
             while ((row = csvReader.readLine()) != null) {
@@ -38,21 +38,21 @@ public final class FollowerGenerator {
         }
 
         Long[] usersArr = users.toArray(new Long[users.size()]);
-        HashSet<Followers> followersSet = new HashSet<Followers>();
+        HashSet<Follows> followersSet = new HashSet<>();
         Random rand = new Random();
-        int numRecords = 5000;
+        int numRecords = 10000000;
         while (numRecords > 0) {
             long userID = usersArr[rand.nextInt(users.size())];
-            long followID = usersArr[rand.nextInt(users.size())];
-            if ((userID != followID) && followersSet.add(new Followers(userID, followID))) {
+            long followsID = usersArr[rand.nextInt(users.size())];
+            if ((userID != followsID) && followersSet.add(new Follows(userID, followsID))) {
                 numRecords--;
             }
         }
 
-        for (Followers record : followersSet) {
+        for (Follows record : followersSet) {
             sb.append(record.getUserID() + "," + record.getFollowsID() + "\n");
         }
 
-        wf.writeToFile("followers.csv", sb.toString());
+        wf.writeToFile("follows.csv", sb.toString());
     }
 }

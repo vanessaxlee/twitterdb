@@ -21,7 +21,7 @@ public final class TweetGenerator {
         Random rand = new Random();
         int numTweets = 1000000;
         while (numTweets > 0) {
-            long userID = rand.nextInt(100) + 1;
+            long userID = rand.nextInt(100000) + 1;
             sb.append(userID + "," + tweet + "\n");
             numTweets--;
         }

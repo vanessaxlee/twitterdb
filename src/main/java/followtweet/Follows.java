@@ -1,21 +1,21 @@
-package followertweet;
+package followtweet;
 
 import java.util.Objects;
 
 /**
- * Represents a record in the followers table.
+ * Represents a record in the follows table.
  */
-public class Followers {
+public class Follows {
 
     private long userID;
     private long followsID;
 
     /**
-     * Constructor for Followers.
+     * Constructor for Follows.
      * @param userID the user ID of the Twitter account
-     * @param followID the ID of a user's follower
+     * @param followsID the ID of a user's following
      */
-    public Followers(long userID, long followsID) {
+    public Follows(long userID, long followsID) {
         this.userID = userID;
         this.followsID = followsID;
     }
@@ -30,9 +30,9 @@ public class Followers {
     }
 
     /**
-     * Gets the follower ID.
+     * Gets the following ID.
      *
-     * @return the follower ID
+     * @return the following ID
      */
     public long getFollowsID() {
         return this.followsID;
@@ -44,11 +44,11 @@ public class Followers {
             return true;
         }
 
-        if (!(o instanceof Followers)) {
+        if (!(o instanceof Follows)) {
             return false;
         }
 
-        Followers f = (Followers) o;
+        Follows f = (Follows) o;
 
         return (this.userID == f.getUserID())
                 && (this.followsID == f.getFollowsID());

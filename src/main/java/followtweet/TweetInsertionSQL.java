@@ -1,4 +1,4 @@
-package followertweet;
+package followtweet;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Entrance point for the program of tweet insertions to the database.
+ * Entrance point for the program of tweet insertions to the mySQL database.
  */
-public class TweetInsertion {
+public class TweetInsertionSQL {
 
-    private static TwitterDBAPI api = new TwitterDBSQL();
+    private static TwitterDBAPISQL api = new TwitterDBSQL();
 
     /**
      * Main method to handle authentication of JDBC connection, file reading from tweets.csv, and insertions to the
@@ -34,18 +34,16 @@ public class TweetInsertion {
 
         api.authenticate(url, user, password);
 
-        List<Tweets> tweetsList = new ArrayList<Tweets>();
+        List<Tweets> tweetsList = new ArrayList<>();
 
         // Reads the tweets.csv file line by line and adds each row to the tweets list.
         try {
             BufferedReader csvReader = new BufferedReader(new FileReader("tweets.csv"));
             String row = "";
 
-            int num = 1000000;
-            while ((row = csvReader.readLine()) != null && num > 0) {
+            while ((row = csvReader.readLine()) != null) {
                 String[] data = row.split(",", 2);
                 tweetsList.add(new Tweets(Long.valueOf(data[0]), data[1]));
-                num--;
             }
 
             csvReader.close();
@@ -59,6 +57,7 @@ public class TweetInsertion {
         long endTime = System.currentTimeMillis();
         // Computes tweet inserts per second.
         System.out.println("Tweet insertions: " + (1000000 / ((endTime - startTime) / 1000)) + " tweets/sec");
+
         api.closeConnection();
     }
 }

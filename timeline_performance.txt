@@ -1,0 +1,2 @@
+Home timeline without broadcasting: 7.62939453125 retrievals/sec
+Home timeline with broadcasting: 762.939453125 retrievals/sec

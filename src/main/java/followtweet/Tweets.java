@@ -1,4 +1,4 @@
-package followertweet;
+package followtweet;
 
 import java.util.Objects;
 

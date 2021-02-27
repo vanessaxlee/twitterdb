@@ -1,21 +1,22 @@
-package followertweet;
+package followtweet;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * Entrance point for the program of accessing a user's home timeline in the database.
+ * Entrance point for the program of accessing a user's home timeline in the mySQL database.
  */
-public class HomeTimeline {
+public class HomeTimelineSQL {
 
-    private static TwitterDBAPI api = new TwitterDBSQL();
+    private static TwitterDBAPISQL api = new TwitterDBSQL();
 
     /**
-     * Main method to handle authentication of JDBC connection, file reading from followers.csv, and randomly selecting
+     * Main method to handle authentication of JDBC connection, file reading from follows.csv, and randomly selecting
      * a user's home timeline, which consists of the ten most recent tweets from the user's followers.
      *
      * @param args the user input
@@ -33,11 +34,11 @@ public class HomeTimeline {
 
         api.authenticate(url, user, password);
 
-        TreeSet<Long> usersSet = new TreeSet<Long>();
+        Set<Long> usersSet = new TreeSet<>();
 
-        // Reads the followers.csv file line by line and adds each row to the users set if it does not exist already.
+        // Reads the follows.csv file line by line and adds each row to the users set if it does not exist already.
         try {
-            BufferedReader csvReader = new BufferedReader(new FileReader("followers.csv"));
+            BufferedReader csvReader = new BufferedReader(new FileReader("follows.csv"));
             String row = "";
 
             while ((row = csvReader.readLine()) != null) {

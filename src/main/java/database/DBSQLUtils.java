@@ -5,7 +5,7 @@ import java.sql.*;
 /**
  * A util class for database connection and insertions.
  */
-public class DBUtils {
+public class DBSQLUtils {
 
     private String url;
     private String user;
@@ -19,7 +19,7 @@ public class DBUtils {
      * @param user the username for the connection
      * @param password the password for the connection
      */
-    public DBUtils(String url, String user, String password) {
+    public DBSQLUtils(String url, String user, String password) {
         this.url = url;
         this.user = user;
         this.password = password;
